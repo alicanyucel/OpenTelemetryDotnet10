@@ -25,6 +25,7 @@ internal class ServiceHelper
 {
     public void Method1()
     {
+        // ActivitySource kullanarak bir işlem başlatmak için StartActivity() yöntemini kullanabiliriz. Bu, işlemi başlatır ve izleme verilerini toplamaya başlar. İşlem tamamlandığında, using bloğunun sonunda otomatik olarak sona erer ve izleme verileri gönderilir. Örneğin, aşağıdaki gibi bir kod ekleyebiliriz:
         using (var activity = ActivitySourceProvider.ActivitySource.StartActivity())
         {
             Console.WriteLine("process1");
