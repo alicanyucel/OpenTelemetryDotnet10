@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  observability-consoleapp:
+    image: observability-consoleapp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+    depends_on:
+      - jaeger
+    networks:
+      - observability-network
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - observability-network
+
+networks:
+  observability-network:
+    driver: bridge
